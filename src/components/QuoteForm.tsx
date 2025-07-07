@@ -107,6 +107,21 @@ export const QuoteForm: React.FC = () => {
       newErrors.packages = t('form.required');
     }
 
+    // Ready date validation (must be future date)
+    if (formData.readyDate) {
+      const selectedDate = new Date(formData.readyDate);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      if (selectedDate < today) {
+        newErrors.readyDate = 'Ready date must be today or in the future';
+      }
+    }
+
+    // Mobile number validation (basic format check)
+    if (formData.mobile && !formData.mobile.match(/^\+?[\d\s\-\(\)]{10,}$/)) {
+      newErrors.mobile = 'Please enter a valid mobile number';
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -125,13 +140,18 @@ export const QuoteForm: React.FC = () => {
       // Calculate total CBM
       const totalCBM = calculateTotalCBM(formData.packages);
       
+      // Format mobile number to E.164
+      const formattedMobile = formData.mobile.startsWith('+') ? formData.mobile : `+${formData.mobile.replace(/\D/g, '')}`;
+      
       // Prepare submission data
       const submissionData = {
         ...formData,
+        mobile: formattedMobile,
         totalCBM,
         userIP,
         timestamp: new Date().toISOString(),
-        mobile: formData.mobile.startsWith('+') ? formData.mobile : `+${formData.mobile}`
+        // Remove null attachments for cleaner data
+        attachments: formData.attachments ? Array.from(formData.attachments).map(f => f.name) : []
       };
 
       // Here you would typically send to Google Sheets or your backend
@@ -146,7 +166,7 @@ export const QuoteForm: React.FC = () => {
       
     } catch (error) {
       console.error('Submission error:', error);
-      // Handle error
+      // Handle error - could show toast or error message
     } finally {
       setIsSubmitting(false);
     }
@@ -161,6 +181,27 @@ export const QuoteForm: React.FC = () => {
     }
   };
 
+  // Check if form is valid for submit button
+  const isFormValid = () => {
+    return formData.pol && 
+           formData.pod && 
+           formData.readyDate && 
+           formData.incoterm && 
+           formData.commodity && 
+           formData.grossWeight > 0 && 
+           formData.company && 
+           formData.email && 
+           formData.mobile &&
+           formData.packages.some(pkg => pkg.length > 0 && pkg.width > 0 && pkg.height > 0 && pkg.qty > 0) &&
+           (!showPickupAddress || (showPickupAddress && formData.pickupAddress));
+  };
+
+  // Get today's date for min date restriction
+  const getTodayDate = () => {
+    const today = new Date();
+    return today.toISOString().split('T')[0];
+  };
+
   if (showSuccess) {
     return (
       <div className="max-w-2xl mx-auto text-center py-12">
@@ -171,7 +212,7 @@ export const QuoteForm: React.FC = () => {
           </h2>
           {quoteResult ? (
             <p className="text-green-700 mb-4">
-              {t('success.withQuote', { amount: quoteResult })}
+              {`Your indicative LCL freight is USD ${quoteResult}, subject to final confirmation.`}
             </p>
           ) : null}
           <p className="text-green-700">
@@ -235,6 +276,7 @@ export const QuoteForm: React.FC = () => {
                 <Input
                   id="readyDate"
                   type="date"
+                  min={getTodayDate()}
                   value={formData.readyDate}
                   onChange={(e) => updateFormData('readyDate', e.target.value)}
                   className={`${isRTL ? 'pr-10' : 'pl-10'}`}
@@ -483,8 +525,8 @@ export const QuoteForm: React.FC = () => {
         <Button
           type="submit"
           size="lg"
-          disabled={isSubmitting}
-          className="px-12 py-3 text-lg font-semibold maritime-gradient hover:opacity-90 transition-opacity"
+          disabled={isSubmitting || !isFormValid()}
+          className="px-12 py-3 text-lg font-semibold maritime-gradient hover:opacity-90 transition-opacity disabled:opacity-50"
         >
           {isSubmitting ? t('form.submitting') : t('form.submit')}
         </Button>
