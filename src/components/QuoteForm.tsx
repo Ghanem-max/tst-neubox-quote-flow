@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Calendar, Upload } from 'lucide-react';
 import { useLanguage } from '@/hooks/useLanguage';
@@ -91,7 +90,7 @@ export const QuoteForm: React.FC = () => {
 
     // Email validation
     if (formData.email && !validateCompanyEmail(formData.email)) {
-      newErrors.email = t('form.invalidEmail');
+      newErrors.email = 'Please use your company email';
     }
 
     // Pickup address validation for specific incoterms
@@ -150,23 +149,33 @@ export const QuoteForm: React.FC = () => {
         totalCBM,
         userIP,
         timestamp: new Date().toISOString(),
-        // Remove null attachments for cleaner data
         attachments: formData.attachments ? Array.from(formData.attachments).map(f => f.name) : []
       };
 
-      // Here you would typically send to Google Sheets or your backend
-      console.log('Form submission:', submissionData);
+      // Call the quoting engine
+      const response = await fetch('/api/submit-quote', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(submissionData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit quote');
+      }
+
+      const result = await response.json();
       
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      if (result.quote) {
+        setQuoteResult(result.quote.toString());
+      }
       
-      // For demo, show success without quote
-      setQuoteResult(null);
       setShowSuccess(true);
       
     } catch (error) {
       console.error('Submission error:', error);
-      // Handle error - could show toast or error message
+      // Show error to user - for now just log, could add toast notification
     } finally {
       setIsSubmitting(false);
     }

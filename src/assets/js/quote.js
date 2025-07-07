@@ -131,3 +131,56 @@ export async function getUserIP() {
     return 'Unknown';
   }
 }
+
+/**
+ * Google Sheets API integration
+ * @param {object} data - Quote submission data
+ * @returns {Promise<object>} Submission result
+ */
+export async function submitToGoogleSheets(data) {
+  try {
+    // This would integrate with Google Sheets API
+    // For now, returning a mock response
+    console.log('Submitting to Google Sheets:', data);
+    
+    return {
+      success: true,
+      sheetId: 'mock-sheet-id',
+      rowId: Math.floor(Math.random() * 1000)
+    };
+  } catch (error) {
+    console.error('Google Sheets submission error:', error);
+    return {
+      success: false,
+      error: error.message
+    };
+  }
+}
+
+/**
+ * Fetch rate matrix from Google Sheets
+ * @returns {Promise<Array>} Rate matrix data
+ */
+export async function fetchRateMatrix() {
+  try {
+    // This would fetch from Google Sheets API
+    // For now, returning mock data
+    return [
+      {
+        POL_code: 'AEJEA',
+        POD_code: 'CNSHA',
+        Rate_USD_per_CBM: 45,
+        Rate_USD_per_Ton: 35
+      },
+      {
+        POL_code: 'CNSHA',
+        POD_code: 'AEJEA',
+        Rate_USD_per_CBM: 42,
+        Rate_USD_per_Ton: 32
+      }
+    ];
+  } catch (error) {
+    console.error('Rate matrix fetch error:', error);
+    return [];
+  }
+}
