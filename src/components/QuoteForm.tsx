@@ -153,13 +153,20 @@ export const QuoteForm: React.FC = () => {
       };
 
       // Call the quoting engine
-      const response = await fetch('/api/submit-quote', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(submissionData),
-      });
+      // const response = await fetch('/api/submit-quote', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify(submissionData),
+      // });
+      
+      const response = await fetch('https://script.google.com/macros/s/AKfycbxXgs0i3rDYKEaqt9A_hk_qsX91RslTSdqzWMGV7sMPSmflezQOv971fYTJ7jNP47pP/exec', 
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json',  },
+          body: JSON.stringify(submissionData),
+        });
 
       if (!response.ok) {
         throw new Error('Failed to submit quote');
