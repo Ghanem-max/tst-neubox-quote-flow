@@ -16,7 +16,7 @@ const IndexContent: React.FC = () => {
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-3">
               <img 
-                src="/lovable-uploads/5dd77841-d41d-4338-9a55-4ec36e1a1952.png" 
+                src="/lovable-uploads/a5467a55-b509-4002-a9d7-27fb79a1469b.png" 
                 alt="Neubox Consolidation Logo" 
                 className="h-12 w-auto"
               />
@@ -133,7 +133,7 @@ const IndexContent: React.FC = () => {
             <div>
               <div className="flex items-center gap-3 mb-6">
                 <img 
-                  src="/lovable-uploads/5dd77841-d41d-4338-9a55-4ec36e1a1952.png" 
+                  src="/lovable-uploads/a5467a55-b509-4002-a9d7-27fb79a1469b.png" 
                   alt="Neubox Consolidation Logo" 
                   className="h-8 w-auto filter brightness-0 invert"
                 />

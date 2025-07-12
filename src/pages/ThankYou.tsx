@@ -12,7 +12,7 @@ const ThankYou: React.FC = () => {
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-center gap-3">
             <img 
-              src="/lovable-uploads/5dd77841-d41d-4338-9a55-4ec36e1a1952.png" 
+              src="/lovable-uploads/a5467a55-b509-4002-a9d7-27fb79a1469b.png" 
               alt="Neubox Consolidation Logo" 
               className="h-12 w-auto"
             />
@@ -70,7 +70,7 @@ const ThankYou: React.FC = () => {
           <div className="text-center">
             <div className="flex items-center justify-center gap-3 mb-4">
               <img 
-                src="/lovable-uploads/5dd77841-d41d-4338-9a55-4ec36e1a1952.png" 
+                src="/lovable-uploads/a5467a55-b509-4002-a9d7-27fb79a1469b.png" 
                 alt="Neubox Consolidation Logo" 
                 className="h-6 w-auto filter brightness-0 invert"
               />
