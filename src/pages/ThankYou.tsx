@@ -1,0 +1,92 @@
+
+import React from 'react';
+import { CheckCircle, Ship, ArrowLeft } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
+
+const ThankYou: React.FC = () => {
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100">
+      {/* Header */}
+      <header className="maritime-gradient text-white shadow-lg">
+        <div className="container mx-auto px-4 py-6">
+          <div className="flex items-center gap-3">
+            <img 
+              src="/lovable-uploads/5dd77841-d41d-4338-9a55-4ec36e1a1952.png" 
+              alt="Neubox Consolidation Logo" 
+              className="h-12 w-auto"
+            />
+            <div>
+              <h1 className="text-2xl font-bold">Neubox Consolidation</h1>
+              <p className="text-blue-100 text-sm">LCL Freight Solutions</p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* Thank You Content */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-2xl mx-auto text-center">
+            <div className="bg-white rounded-2xl shadow-xl p-12">
+              <div className="mb-8">
+                <CheckCircle className="h-20 w-20 text-green-500 mx-auto mb-6" />
+                <h2 className="text-3xl font-bold text-gray-800 mb-4">
+                  Thanks for getting in touch.
+                </h2>
+                <p className="text-lg text-gray-600 leading-relaxed">
+                  Your request has been received. Our team is reviewing the details and will contact you within 24 business hours.
+                </p>
+              </div>
+
+              <div className="border-t border-gray-200 pt-8">
+                <div className="flex items-center justify-center gap-4 mb-6">
+                  <div className="flex items-center gap-2 text-primary">
+                    <Ship className="h-5 w-5" />
+                    <span className="text-sm font-medium">Professional Service</span>
+                  </div>
+                  <div className="w-1 h-1 bg-gray-300 rounded-full"></div>
+                  <div className="flex items-center gap-2 text-primary">
+                    <CheckCircle className="h-5 w-5" />
+                    <span className="text-sm font-medium">24/7 Support</span>
+                  </div>
+                </div>
+                
+                <Link to="/">
+                  <Button className="maritime-gradient text-white hover:opacity-90 transition-opacity">
+                    <ArrowLeft className="h-4 w-4 mr-2" />
+                    Back to Home
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-800 text-white py-8 mt-auto">
+        <div className="container mx-auto px-4">
+          <div className="text-center">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <img 
+                src="/lovable-uploads/5dd77841-d41d-4338-9a55-4ec36e1a1952.png" 
+                alt="Neubox Consolidation Logo" 
+                className="h-6 w-auto filter brightness-0 invert"
+              />
+              <span className="text-xl font-bold">Neubox Consolidation</span>
+            </div>
+            <p className="text-gray-400 text-sm">
+              Professional LCL freight consolidation services worldwide
+            </p>
+            <p className="text-gray-400 text-xs mt-2">
+              © 2024 Neubox Consolidation. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default ThankYou;

@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Ship, Globe, ArrowRight } from 'lucide-react';
+import { Ship, Globe, ArrowRight, Mail, Phone, MapPin } from 'lucide-react';
 import { useLanguage, LanguageProvider } from '@/hooks/useLanguage';
 import { QuoteForm } from '@/components/QuoteForm';
 import { Button } from '@/components/ui/button';
@@ -15,9 +15,11 @@ const IndexContent: React.FC = () => {
         <div className="container mx-auto px-4 py-6">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-3">
-              <div className="bg-white/20 p-2 rounded-lg">
-                <Ship className="h-8 w-8" />
-              </div>
+              <img 
+                src="/lovable-uploads/5dd77841-d41d-4338-9a55-4ec36e1a1952.png" 
+                alt="Neubox Consolidation Logo" 
+                className="h-12 w-auto"
+              />
               <div>
                 <h1 className="text-2xl font-bold">{t('header.title')}</h1>
                 <p className="text-blue-100 text-sm">{t('header.subtitle')}</p>
@@ -44,6 +46,12 @@ const IndexContent: React.FC = () => {
             <h2 className="text-4xl font-bold text-gray-800 mb-4">
               Professional LCL Freight Solutions
             </h2>
+            
+            {/* Company Description */}
+            <p className="text-lg text-gray-700 max-w-4xl mx-auto mb-6 leading-relaxed">
+              Neubox Consolidation is a modern freight solutions provider based in Egypt, specializing in Less-than-Container Load (LCL) shipments. With a focus on efficiency, transparency, and global reach, Neubox helps businesses of all sizes move cargo seamlessly across borders.
+            </p>
+            
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Get instant quotes for your Less-than-Container-Load shipments with our advanced quoting engine. 
               Fast, reliable, and competitive rates worldwide.
@@ -117,18 +125,56 @@ const IndexContent: React.FC = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-800 text-white py-8">
+      {/* Enhanced Footer */}
+      <footer className="bg-gray-800 text-white py-12">
         <div className="container mx-auto px-4">
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <Ship className="h-6 w-6" />
-              <span className="text-xl font-bold">Neubox Consolidation</span>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Company Info */}
+            <div>
+              <div className="flex items-center gap-3 mb-6">
+                <img 
+                  src="/lovable-uploads/5dd77841-d41d-4338-9a55-4ec36e1a1952.png" 
+                  alt="Neubox Consolidation Logo" 
+                  className="h-8 w-auto filter brightness-0 invert"
+                />
+                <span className="text-xl font-bold">Neubox Consolidation</span>
+              </div>
+              <p className="text-gray-400 mb-4">
+                Professional LCL freight consolidation services worldwide
+              </p>
+              <p className="text-gray-500 text-sm">
+                <strong>Disclaimer:</strong> Neubox Consolidation provides shipping estimates based on the information provided. Final rates may vary.
+              </p>
             </div>
+
+            {/* Contact Info */}
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Contact Us</h4>
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <Mail className="h-5 w-5 text-blue-400" />
+                  <a href="mailto:quotation@Neubox.com" className="text-gray-300 hover:text-white transition-colors">
+                    quotation@Neubox.com
+                  </a>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Phone className="h-5 w-5 text-blue-400" />
+                  <a href="tel:+201223245666" className="text-gray-300 hover:text-white transition-colors">
+                    +20 122 324 5666
+                  </a>
+                </div>
+                <div className="flex items-start gap-3">
+                  <MapPin className="h-5 w-5 text-blue-400 mt-1" />
+                  <span className="text-gray-300">
+                    41 Almoltaka Alarabi, Heliopolis, Cairo, Egypt
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="border-t border-gray-700 mt-8 pt-6 text-center">
             <p className="text-gray-400 text-sm">
-              Professional LCL freight consolidation services worldwide
-            </p>
-            <p className="text-gray-400 text-xs mt-2">
               © 2024 Neubox Consolidation. All rights reserved.
             </p>
           </div>
