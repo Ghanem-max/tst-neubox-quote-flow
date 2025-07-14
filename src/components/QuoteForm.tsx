@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Calendar, Upload } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/hooks/useLanguage';
 import { PortSelector } from './PortSelector';
 import { PackageTable } from './PackageTable';
@@ -41,6 +42,7 @@ interface FormData {
 
 export const QuoteForm: React.FC = () => {
   const { t, isRTL } = useLanguage();
+  const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [quoteResult, setQuoteResult] = useState<string | null>(null);
@@ -179,7 +181,8 @@ export const QuoteForm: React.FC = () => {
         setQuoteResult(result.quote.toString());
       }
       
-      setShowSuccess(true);
+      // Redirect to Thank You page instead of showing inline success
+      navigate('/thank-you');
       
     } catch (error) {
       console.error('Submission error:', error);

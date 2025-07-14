@@ -17,6 +17,29 @@ const translations = {
     'header.subtitle': 'LCL Freight Quote Request',
     'header.toggleLang': 'إلى العربية',
     
+    // Hero Content
+    'hero.title': 'Professional LCL Freight Solutions',
+    'hero.description': 'Neubox Consolidation is a modern freight solutions provider based in Egypt, specializing in Less-than-Container Load (LCL) shipments. With a focus on efficiency, transparency, and global reach, Neubox helps businesses of all sizes move cargo seamlessly across borders.',
+    'hero.feature1': '1000+ Ports Worldwide',
+    'hero.feature2': 'Instant Quote Engine',
+    'hero.feature3': '24/7 Support',
+    'features.title': 'Why Choose Neubox Consolidation?',
+    'features.subtitle': 'Experience the difference with our advanced LCL consolidation services',
+    'features.global.title': 'Global Network',
+    'features.global.desc': 'Access to 1000+ seaports worldwide with comprehensive coverage',
+    'features.quotes.title': 'Fast Quotes',
+    'features.quotes.desc': 'Get instant freight quotes with our automated quoting engine',
+    'features.support.title': 'Bilingual Support',
+    'features.support.desc': 'Full Arabic and English support for Middle East operations',
+    'footer.company': 'Neubox Consolidation',
+    'footer.tagline': 'Professional LCL freight consolidation services worldwide',
+    'footer.disclaimer': 'Disclaimer: Neubox Consolidation provides shipping estimates based on the information provided. Final rates may vary.',
+    'footer.contact': 'Contact Us',
+    'footer.address': '41 Almoltaka Alarabi, Heliopolis, Cairo, Egypt',
+    'footer.copyright': '© 2025 Neubox Consolidation. All rights reserved.',
+    'thankyou.title': 'Thanks for getting in touch.',
+    'thankyou.message': 'Your request has been received. Our team is reviewing the details and will contact you within 24 business hours.',
+    
     // Shipment Section
     'shipment.title': 'Shipment Details',
     'shipment.pol': 'Port of Loading',
@@ -76,8 +99,31 @@ const translations = {
   ar: {
     // Header
     'header.title': 'نيوبوكس للشحن',
-    'header.subtitle': 'طلب عرض سعر شحن جماعي',
+    'header.subtitle': 'طلب عرض سعر شحن جزئي',
     'header.toggleLang': 'English',
+    
+    // Hero Content
+    'hero.title': 'حلول الشحن الجزئي الاحترافية',
+    'hero.description': 'نيوبوكس للشحن هو مزود حديث لحلول الشحن مقره مصر، متخصص في شحنات أقل من حمولة الحاوية (LCL). مع التركيز على الكفاءة والشفافية والوصول العالمي، تساعد نيوبوكس الشركات من جميع الأحجام على نقل البضائع بسلاسة عبر الحدود.',
+    'hero.feature1': 'أكثر من 1000 ميناء عالمياً',
+    'hero.feature2': 'محرك عروض أسعار فوري',
+    'hero.feature3': 'دعم على مدار الساعة',
+    'features.title': 'لماذا تختار نيوبوكس للشحن؟',
+    'features.subtitle': 'اختبر الفرق مع خدمات الشحن الجزئي المتقدمة لدينا',
+    'features.global.title': 'شبكة عالمية',
+    'features.global.desc': 'الوصول إلى أكثر من 1000 ميناء بحري في جميع أنحاء العالم مع تغطية شاملة',
+    'features.quotes.title': 'عروض أسعار سريعة',
+    'features.quotes.desc': 'احصل على عروض أسعار الشحن الفورية مع محرك التسعير الآلي لدينا',
+    'features.support.title': 'دعم ثنائي اللغة',
+    'features.support.desc': 'دعم كامل باللغتين العربية والإنجليزية لعمليات الشرق الأوسط',
+    'footer.company': 'نيوبوكس للشحن',
+    'footer.tagline': 'خدمات شحن جزئي احترافية في جميع أنحاء العالم',
+    'footer.disclaimer': 'إخلاء المسؤولية: تقدم نيوبوكس للشحن تقديرات الشحن بناءً على المعلومات المقدمة. قد تختلف الأسعار النهائية.',
+    'footer.contact': 'اتصل بنا',
+    'footer.address': '41 ب المتلقى العربي, هليوبوليس, القاهرة, مصر',
+    'footer.copyright': '© 2025 نيوبوكس للشحن. جميع الحقوق محفوظة.',
+    'thankyou.title': 'شكراً لتواصلك معنا.',
+    'thankyou.message': 'تم استلام طلبك. فريقنا يراجع التفاصيل وسيتواصل معك خلال 24 ساعة عمل.',
     
     // Shipment Section
     'shipment.title': 'تفاصيل الشحنة',

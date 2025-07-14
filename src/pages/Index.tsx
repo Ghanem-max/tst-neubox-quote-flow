@@ -18,7 +18,7 @@ const IndexContent: React.FC = () => {
               <img 
                 src="/lovable-uploads/a5467a55-b509-4002-a9d7-27fb79a1469b.png" 
                 alt="Neubox Consolidation Logo" 
-                className="h-12 w-auto"
+                className="h-16 w-auto md:h-20"
               />
               <div>
                 <h1 className="text-2xl font-bold">{t('header.title')}</h1>
@@ -44,30 +44,25 @@ const IndexContent: React.FC = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-800 mb-4">
-              Professional LCL Freight Solutions
+              {t('hero.title')}
             </h2>
             
             {/* Company Description */}
             <p className="text-lg text-gray-700 max-w-4xl mx-auto mb-6 leading-relaxed">
-              Neubox Consolidation is a modern freight solutions provider based in Egypt, specializing in Less-than-Container Load (LCL) shipments. With a focus on efficiency, transparency, and global reach, Neubox helps businesses of all sizes move cargo seamlessly across borders.
-            </p>
-            
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Get instant quotes for your Less-than-Container-Load shipments with our advanced quoting engine. 
-              Fast, reliable, and competitive rates worldwide.
+              {t('hero.description')}
             </p>
             <div className="flex justify-center items-center gap-4 mt-8">
               <div className="flex items-center gap-2 text-primary">
                 <div className="w-2 h-2 bg-primary rounded-full"></div>
-                <span className="text-sm font-medium">1000+ Ports Worldwide</span>
+                <span className="text-sm font-medium">{t('hero.feature1')}</span>
               </div>
               <div className="flex items-center gap-2 text-primary">
                 <div className="w-2 h-2 bg-primary rounded-full"></div>
-                <span className="text-sm font-medium">Instant Quote Engine</span>
+                <span className="text-sm font-medium">{t('hero.feature2')}</span>
               </div>
               <div className="flex items-center gap-2 text-primary">
                 <div className="w-2 h-2 bg-primary rounded-full"></div>
-                <span className="text-sm font-medium">24/7 Support</span>
+                <span className="text-sm font-medium">{t('hero.feature3')}</span>
               </div>
             </div>
           </div>
@@ -84,10 +79,10 @@ const IndexContent: React.FC = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h3 className="text-3xl font-bold text-gray-800 mb-4">
-              Why Choose Neubox Consolidation?
+              {t('features.title')}
             </h3>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Experience the difference with our advanced LCL consolidation services
+              {t('features.subtitle')}
             </p>
           </div>
 
@@ -96,9 +91,9 @@ const IndexContent: React.FC = () => {
               <div className="maritime-gradient-light rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
                 <Ship className="h-8 w-8 text-primary" />
               </div>
-              <h4 className="text-xl font-semibold mb-2">Global Network</h4>
+              <h4 className="text-xl font-semibold mb-2">{t('features.global.title')}</h4>
               <p className="text-gray-600">
-                Access to 1000+ seaports worldwide with comprehensive coverage
+                {t('features.global.desc')}
               </p>
             </div>
 
@@ -106,9 +101,9 @@ const IndexContent: React.FC = () => {
               <div className="maritime-gradient-light rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
                 <ArrowRight className="h-8 w-8 text-primary" />
               </div>
-              <h4 className="text-xl font-semibold mb-2">Fast Quotes</h4>
+              <h4 className="text-xl font-semibold mb-2">{t('features.quotes.title')}</h4>
               <p className="text-gray-600">
-                Get instant freight quotes with our automated quoting engine
+                {t('features.quotes.desc')}
               </p>
             </div>
 
@@ -116,9 +111,9 @@ const IndexContent: React.FC = () => {
               <div className="maritime-gradient-light rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
                 <Globe className="h-8 w-8 text-primary" />
               </div>
-              <h4 className="text-xl font-semibold mb-2">Bilingual Support</h4>
+              <h4 className="text-xl font-semibold mb-2">{t('features.support.title')}</h4>
               <p className="text-gray-600">
-                Full Arabic and English support for Middle East operations
+                {t('features.support.desc')}
               </p>
             </div>
           </div>
@@ -135,21 +130,21 @@ const IndexContent: React.FC = () => {
                 <img 
                   src="/lovable-uploads/a5467a55-b509-4002-a9d7-27fb79a1469b.png" 
                   alt="Neubox Consolidation Logo" 
-                  className="h-8 w-auto filter brightness-0 invert"
+                  className="h-10 w-auto filter brightness-0 invert md:h-12"
                 />
-                <span className="text-xl font-bold">Neubox Consolidation</span>
+                <span className="text-xl font-bold">{t('footer.company')}</span>
               </div>
               <p className="text-gray-400 mb-4">
-                Professional LCL freight consolidation services worldwide
+                {t('footer.tagline')}
               </p>
               <p className="text-gray-500 text-sm">
-                <strong>Disclaimer:</strong> Neubox Consolidation provides shipping estimates based on the information provided. Final rates may vary.
+                <strong>{t('footer.disclaimer')}</strong>
               </p>
             </div>
 
             {/* Contact Info */}
             <div>
-              <h4 className="text-lg font-semibold mb-4">Contact Us</h4>
+              <h4 className="text-lg font-semibold mb-4">{t('footer.contact')}</h4>
               <div className="space-y-3">
                 <div className="flex items-center gap-3">
                   <Mail className="h-5 w-5 text-blue-400" />
@@ -166,7 +161,7 @@ const IndexContent: React.FC = () => {
                 <div className="flex items-start gap-3">
                   <MapPin className="h-5 w-5 text-blue-400 mt-1" />
                   <span className="text-gray-300">
-                    41 Almoltaka Alarabi, Heliopolis, Cairo, Egypt
+                    {t('footer.address')}
                   </span>
                 </div>
               </div>
@@ -175,7 +170,7 @@ const IndexContent: React.FC = () => {
 
           <div className="border-t border-gray-700 mt-8 pt-6 text-center">
             <p className="text-gray-400 text-sm">
-              © 2024 Neubox Consolidation. All rights reserved.
+              {t('footer.copyright')}
             </p>
           </div>
         </div>
