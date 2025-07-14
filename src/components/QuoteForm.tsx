@@ -163,23 +163,25 @@ export const QuoteForm: React.FC = () => {
       //   body: JSON.stringify(submissionData),
       // });
       
-      console.log('Submitting quote request...', submissionData);
-      
       const response = await fetch('https://script.google.com/macros/s/AKfycbz5RAHm0znC6u1nJ-cqYZQIMw0FVzyji6uo9qTEJrIMpUn0VkWtOegpg9wLHCvLFiHv/exec', 
         {
           method: 'POST',
           mode: "no-cors", // suppresses CORS error, still sends data
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json',  },
           body: JSON.stringify(submissionData),
         });
 
-      console.log('Form submission response:', response);
+      if (!response.ok) {
+        throw new Error('Failed to submit quote');
+      }
 
-      // With no-cors mode, we can't read the response, but we assume success if no error is thrown
-      // Since the network requests show the data is being sent successfully (status 0 is expected with no-cors)
-      console.log('Quote submitted successfully, redirecting to thank you page...');
+      const result = await response.json();
       
-      // Redirect to Thank You page
+      if (result.quote) {
+        setQuoteResult(result.quote.toString());
+      }
+      
+      // Redirect to Thank You page instead of showing inline success
       navigate('/thank-you');
       
     } catch (error) {
