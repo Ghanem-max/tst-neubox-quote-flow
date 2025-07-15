@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Calendar, Upload } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { Calendar, Upload, Loader2 } from 'lucide-react';
 import { useLanguage } from '@/hooks/useLanguage';
 import { PortSelector } from './PortSelector';
 import { PackageTable } from './PackageTable';
@@ -42,10 +41,8 @@ interface FormData {
 
 export const QuoteForm: React.FC = () => {
   const { t, isRTL } = useLanguage();
-  const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
-  const [quoteResult, setQuoteResult] = useState<string | null>(null);
   const [formData, setFormData] = useState<FormData>({
     pol: '',
     pod: '',
@@ -175,14 +172,9 @@ export const QuoteForm: React.FC = () => {
         throw new Error('Failed to submit quote');
       }
 
-      const result = await response.json();
-      
-      if (result.quote) {
-        setQuoteResult(result.quote.toString());
-      }
-      
-      // Redirect to Thank You page instead of showing inline success
-      navigate('/thank-you');
+      // Since we're using no-cors mode, we can't read the response
+      // but if we reach here without throwing, consider it successful
+      setShowSuccess(true);
       
     } catch (error) {
       console.error('Submission error:', error);
@@ -224,20 +216,21 @@ export const QuoteForm: React.FC = () => {
 
   if (showSuccess) {
     return (
-      <div className="max-w-2xl mx-auto text-center py-12">
-        <div className="bg-green-50 border border-green-200 rounded-lg p-8">
-          <div className="text-green-600 text-6xl mb-4">✓</div>
-          <h2 className="text-2xl font-bold text-green-800 mb-4">
-            {t('success.title')}
-          </h2>
-          {quoteResult ? (
-            <p className="text-green-700 mb-4">
-              {`Your indicative LCL freight is USD ${quoteResult}, subject to final confirmation.`}
+      <div className="max-w-4xl mx-auto animate-fade-in">
+        <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-12 text-center">
+          <div className="mb-8">
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-green-100 rounded-full mb-6">
+              <svg className="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">
+              Thanks for getting in touch.
+            </h2>
+            <p className="text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto">
+              Your request has been received. Our team is reviewing the details and will contact you within 24 business hours.
             </p>
-          ) : null}
-          <p className="text-green-700">
-            {t('success.message')}
-          </p>
+          </div>
         </div>
       </div>
     );
@@ -548,6 +541,7 @@ export const QuoteForm: React.FC = () => {
           disabled={isSubmitting || !isFormValid()}
           className="px-12 py-3 text-lg font-semibold maritime-gradient hover:opacity-90 transition-opacity disabled:opacity-50"
         >
+          {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
           {isSubmitting ? t('form.submitting') : t('form.submit')}
         </Button>
       </div>
