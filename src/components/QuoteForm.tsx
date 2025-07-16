@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Calendar, Upload, Loader2 } from 'lucide-react';
+import DOMPurify from 'dompurify';
 import { useLanguage } from '@/hooks/useLanguage';
 import { PortSelector } from './PortSelector';
 import { PackageTable } from './PackageTable';
@@ -105,6 +106,11 @@ export const QuoteForm: React.FC = () => {
       newErrors.packages = t('form.required');
     }
 
+    // File validation
+    if (formData.attachments && !validateFileUpload(formData.attachments)) {
+      newErrors.attachments = 'Invalid file type or size. Please upload PDF, DOC, JPG, PNG, or XLS files under 10MB.';
+    }
+
     // Ready date validation (must be future date)
     if (formData.readyDate) {
       const selectedDate = new Date(formData.readyDate);
@@ -185,12 +191,58 @@ export const QuoteForm: React.FC = () => {
   };
 
   const updateFormData = (field: keyof FormData, value: any) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    // Sanitize text inputs to prevent XSS
+    const textFields = ['commodity', 'pickupAddress', 'company', 'contactPerson'];
+    let sanitizedValue = value;
+    
+    if (textFields.includes(field) && typeof value === 'string') {
+      sanitizedValue = DOMPurify.sanitize(value, { 
+        ALLOWED_TAGS: [], 
+        ALLOWED_ATTR: [],
+        KEEP_CONTENT: true 
+      });
+    }
+    
+    setFormData(prev => ({ ...prev, [field]: sanitizedValue }));
     
     // Clear error when field is updated
     if (errors[field]) {
       setErrors(prev => ({ ...prev, [field]: '' }));
     }
+  };
+
+  // Enhanced file validation
+  const validateFileUpload = (files: FileList | null): boolean => {
+    if (!files || files.length === 0) return true;
+    
+    const allowedTypes = [
+      'application/pdf',
+      'application/msword',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+      'image/jpeg',
+      'image/jpg', 
+      'image/png',
+      'application/vnd.ms-excel',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    ];
+    
+    const maxSize = 10 * 1024 * 1024; // 10MB
+    
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      
+      // Check file type
+      if (!allowedTypes.includes(file.type)) {
+        return false;
+      }
+      
+      // Check file size
+      if (file.size > maxSize) {
+        return false;
+      }
+    }
+    
+    return true;
   };
 
   // Check if form is valid for submit button
@@ -441,7 +493,18 @@ export const QuoteForm: React.FC = () => {
                 id="attachments"
                 type="file"
                 multiple
-                onChange={(e) => updateFormData('attachments', e.target.files)}
+                onChange={(e) => {
+                  if (validateFileUpload(e.target.files)) {
+                    updateFormData('attachments', e.target.files);
+                  } else {
+                    // Clear the input if validation fails
+                    e.target.value = '';
+                    setErrors(prev => ({ 
+                      ...prev, 
+                      attachments: 'Invalid file type or size. Please upload PDF, DOC, JPG, PNG, or XLS files under 10MB.' 
+                    }));
+                  }
+                }}
                 className="flex-1"
                 accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.xls,.xlsx"
               />
@@ -450,6 +513,9 @@ export const QuoteForm: React.FC = () => {
             <p className="text-xs text-muted-foreground mt-1">
               PDF, DOC, JPG, PNG, XLS files only. Max 10MB per file.
             </p>
+            {errors.attachments && (
+              <p className="text-destructive text-sm mt-1">{errors.attachments}</p>
+            )}
           </div>
         </CardContent>
       </Card>

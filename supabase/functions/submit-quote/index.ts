@@ -5,7 +5,35 @@ import { Resend } from "npm:resend@2.0.0";
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+  'X-Content-Type-Options': 'nosniff',
+  'X-Frame-Options': 'DENY',
+  'X-XSS-Protection': '1; mode=block',
+  'Referrer-Policy': 'strict-origin-when-cross-origin',
+  'Content-Security-Policy': "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:;",
 };
+
+// Rate limiting storage (in-memory for this example)
+const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
+
+// Rate limiting function
+function checkRateLimit(clientId: string, maxRequests: number = 5, windowMs: number = 60000): boolean {
+  const now = Date.now();
+  const clientData = rateLimitStore.get(clientId);
+  
+  if (!clientData || now > clientData.resetTime) {
+    // Reset or create new entry
+    rateLimitStore.set(clientId, { count: 1, resetTime: now + windowMs });
+    return true;
+  }
+  
+  if (clientData.count >= maxRequests) {
+    return false; // Rate limit exceeded
+  }
+  
+  clientData.count++;
+  rateLimitStore.set(clientId, clientData);
+  return true;
+}
 
 interface QuoteSubmission {
   pol: string;
@@ -169,6 +197,27 @@ const handler = async (req: Request): Promise<Response> => {
     return new Response(JSON.stringify({ error: 'Method not allowed' }), {
       status: 405,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+    });
+  }
+
+  // Rate limiting check
+  const clientIP = req.headers.get('cf-connecting-ip') || 
+                   req.headers.get('x-forwarded-for') || 
+                   req.headers.get('x-real-ip') ||
+                   'unknown';
+  
+  if (!checkRateLimit(clientIP)) {
+    console.log(`Rate limit exceeded for IP: ${clientIP}`);
+    return new Response(JSON.stringify({ 
+      error: 'Rate limit exceeded. Please try again later.',
+      retryAfter: 60 
+    }), {
+      status: 429,
+      headers: { 
+        ...corsHeaders, 
+        'Content-Type': 'application/json',
+        'Retry-After': '60'
+      }
     });
   }
 
