@@ -147,12 +147,6 @@ const IndexContent: React.FC = () => {
               <h4 className="text-lg font-semibold mb-4">{t('footer.contact')}</h4>
               <div className="space-y-3">
                 <div className="flex items-center gap-3">
-                  <Mail className="h-5 w-5 text-blue-400" />
-                  <a href="mailto:quotation@Neubox.com" className="text-gray-300 hover:text-white transition-colors">
-                    quotation@Neubox.com
-                  </a>
-                </div>
-                <div className="flex items-center gap-3">
                   <Phone className="h-5 w-5 text-blue-400" />
                   <a href="tel:+201223245666" className="text-gray-300 hover:text-white transition-colors">
                     +20 122 324 5666
