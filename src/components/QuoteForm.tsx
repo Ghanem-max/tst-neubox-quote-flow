@@ -166,7 +166,7 @@ export const QuoteForm: React.FC = () => {
       //   body: JSON.stringify(submissionData),
       // });
       
-      const response = await fetch('https://script.google.com/macros/s/AKfycby82moPwaALiQ5Mabeakco7Q90AkIeedq9uGTHz1JhJaNiOAuirlGQdsnCz5mQTKM-9/exec', 
+      const response = await fetch('https://script.google.com/macros/s/AKfycbxRK0Q8V9CE_So1U8B-GHvaebD9Rqq7nHT8XXLe9zUYQ3126koPHXDhSlUsxJjyNWRl/exec', 
         {
           method: 'POST',
           mode: "no-cors", // suppresses CORS error, still sends data
