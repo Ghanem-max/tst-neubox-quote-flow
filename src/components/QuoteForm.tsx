@@ -171,7 +171,8 @@ export const QuoteForm: React.FC = () => {
           method: 'POST',
           // mode: "no-cors", // suppresses CORS error, still sends data
           headers: { 'Content-Type': 'application/json',  },
-          body: JSON.stringify(submissionData),
+          //body: JSON.stringify(submissionData),
+          body: `data=${encodeURIComponent(JSON.stringify(submissionData))}`,
         });
 
       if (!response.ok) {
