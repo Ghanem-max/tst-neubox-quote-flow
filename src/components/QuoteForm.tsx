@@ -166,7 +166,7 @@ export const QuoteForm: React.FC = () => {
       //   body: JSON.stringify(submissionData),
       // });
       
-      const response = await fetch('https://script.google.com/macros/s/AKfycbw613YmTKZDP8uZSBPgatr2dfxMULqdTxBBnQpBk-V38qthkwitk9tAHK4e5IRQkM8_/exec', {
+      const response = await fetch('https://script.google.com/macros/s/AKfycby0qh8m_IIplPBgKb42EiZFk5lCf1zj_DEluXrND-rm4MF6ijhtv3MGXjeM9uuQPChMZw/exec', {
           method: 'POST',
             headers: {
                   'Content-Type': 'application/json'
