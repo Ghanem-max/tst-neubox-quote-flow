@@ -174,7 +174,7 @@ export const QuoteForm: React.FC = () => {
                     body: JSON.stringify(submissionData)
                   });
 
-
+console.log(response)
       if (!response.ok) {
         throw new Error('Failed to submit quote');
       }
